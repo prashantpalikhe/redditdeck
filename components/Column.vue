@@ -104,7 +104,7 @@ export default class Subreddit extends Vue {
   }
 
   async onDeleteClick() {
-    const confirmed = await this.$refs.confirmDialog.open({
+    const confirmed = await (this.$refs.confirmDialog as any).open({
       title: 'Remove column',
       message: `Are you sure you want to remove /r/${this.subreddit}`,
       type: 'confirm'

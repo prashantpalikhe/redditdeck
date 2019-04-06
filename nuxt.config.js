@@ -44,8 +44,7 @@ export default {
   plugins: [
     '@/plugins/localStorage',
     '@/plugins/vuetify',
-    '@/plugins/promised',
-    '@/filters/filteredPosts'
+    '@/plugins/promised'
   ],
 
   /*
