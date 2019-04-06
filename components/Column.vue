@@ -1,9 +1,37 @@
 <template>
   <div class="column">
     <v-toolbar flat height="60">
-      <v-icon class="column__handle handle">menu</v-icon>
+      <v-btn icon>
+        <v-icon class="column__handle handle">menu</v-icon>
+      </v-btn>
       <v-toolbar-title>/r/{{ subreddit }}</v-toolbar-title>
+      <v-spacer />
+      <v-menu bottom left>
+        <template v-slot:activator="{ on }">
+          <v-btn dark icon v-on="on">
+            <v-icon>more_vert</v-icon>
+          </v-btn>
+        </template>
+
+        <v-list>
+          <v-list-tile @click="$emit('delete')">
+            <v-list-tile-title>Delete</v-list-tile-title>
+          </v-list-tile>
+          <v-list-tile @click="showSearch = true">
+            <v-list-tile-title>Search</v-list-tile-title>
+          </v-list-tile>
+        </v-list>
+      </v-menu>
     </v-toolbar>
+
+    <v-slide-y-reverse-transition>
+      <v-toolbar v-if="showSearch">
+        <v-text-field hide-details prepend-icon="search" single-line />
+        <v-btn icon @click="showSearch = false">
+          <v-icon>clear</v-icon>
+        </v-btn>
+      </v-toolbar>
+    </v-slide-y-reverse-transition>
 
     <Promised :promise="postsPromise">
       <template #pending>
@@ -38,6 +66,8 @@ export default class Subreddit extends Vue {
   subreddit: string
 
   postsPromise: any = null
+
+  showSearch: boolean = false
 
   mounted() {
     this.postsPromise = this.$axios.get(
