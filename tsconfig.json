@@ -1,0 +1,45 @@
+{
+  "include": ["./**/*"],
+  "exclude": [
+    "node_modules",
+    "./dist/**/*",
+    "./.nuxt/**/*",
+    "./cypress/**/*",
+    "./scripts/**/*"
+  ],
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "lib": ["esnext", "esnext.asynciterable", "dom"],
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "resolveJsonModule": true,
+    "strictPropertyInitialization": false,
+    "noImplicitThis": false,
+    "allowJs": true,
+    "sourceMap": true,
+    "strict": true,
+    "allowSyntheticDefaultImports": true,
+    "noImplicitAny": false,
+    "noEmit": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "removeComments": true,
+    "types": [
+      "@types/node",
+      "@nuxt/vue-app",
+      "@types/jest",
+      "@types/lodash",
+      "@nuxtjs/axios",
+      "@types/webpack-env",
+      "vuetify"
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["./*"],
+      "@/*": ["./*"]
+    }
+  }
+}
