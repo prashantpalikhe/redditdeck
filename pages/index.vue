@@ -4,6 +4,7 @@
       v-for="subreddit in subreddits"
       :key="subreddit"
       :subreddit="subreddit"
+      @delete="deleteSubreddit($event)"
     />
   </div>
 </template>
@@ -23,6 +24,7 @@ const Reddit = namespace('reddit')
 })
 export default class Home extends Vue {
   @Reddit.State subreddits
+  @Reddit.Action deleteSubreddit
 
   mounted() {
     dragula([this.$refs.subredditsContainer], {

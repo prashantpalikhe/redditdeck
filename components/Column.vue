@@ -14,7 +14,7 @@
         </template>
 
         <v-list>
-          <v-list-tile @click="$emit('delete')">
+          <v-list-tile @click="onDeleteClick">
             <v-list-tile-title>Delete</v-list-tile-title>
           </v-list-tile>
           <v-list-tile @click="showSearch = true">
@@ -26,8 +26,13 @@
 
     <v-slide-y-reverse-transition>
       <v-toolbar v-if="showSearch">
-        <v-text-field hide-details prepend-icon="search" single-line />
-        <v-btn icon @click="showSearch = false">
+        <v-text-field
+          v-model.trim="searchQuery"
+          hide-details
+          prepend-icon="search"
+          single-line
+        />
+        <v-btn icon @click="clearSearch">
           <v-icon>clear</v-icon>
         </v-btn>
       </v-toolbar>
@@ -42,7 +47,7 @@
         <v-slide-y-reverse-transition>
           <div class="column__list">
             <post
-              v-for="{ data: post } in posts"
+              v-for="{ data: post } in filterPosts(posts)"
               :key="post.title"
               :post="post"
             />
@@ -50,16 +55,20 @@
         </v-slide-y-reverse-transition>
       </template>
     </Promised>
+
+    <confirm-dialog ref="confirmDialog" />
   </div>
 </template>
 
 <script lang="ts">
+import Fuse from 'fuse.js'
 import { Component, Vue, Prop } from 'vue-property-decorator'
 import Post from '~/components/Post.vue'
+import ConfirmDialog from '~/components/Dialog.vue'
 
 @Component({
   name: 'Column',
-  components: { Post }
+  components: { Post, ConfirmDialog }
 })
 export default class Subreddit extends Vue {
   @Prop({ type: String, required: true })
@@ -67,7 +76,10 @@ export default class Subreddit extends Vue {
 
   postsPromise: any = null
 
-  showSearch: boolean = false
+  searchQuery = ''
+  showSearch = false
+
+  fuse = null
 
   mounted() {
     this.postsPromise = this.$axios.get(
@@ -75,6 +87,37 @@ export default class Subreddit extends Vue {
         this.subreddit
       }.json`
     )
+  }
+
+  filterPosts(posts) {
+    if (this.searchQuery === '') {
+      return posts
+    }
+
+    const options = {
+      keys: ['data.title']
+    }
+
+    const fuse = new Fuse(posts, options)
+
+    return fuse.search(this.searchQuery)
+  }
+
+  async onDeleteClick() {
+    const confirmed = await this.$refs.confirmDialog.open({
+      title: 'Remove column',
+      message: `Are you sure you want to remove /r/${this.subreddit}`,
+      type: 'confirm'
+    })
+
+    if (confirmed) {
+      this.$emit('delete', this.subreddit)
+    }
+  }
+
+  clearSearch() {
+    this.showSearch = false
+    this.searchQuery = ''
   }
 }
 </script>

@@ -18,6 +18,7 @@
     "@nuxtjs/pwa": "^2.6.0",
     "cross-env": "^5.2.0",
     "dragula": "^3.7.2",
+    "fuse.js": "^3.4.4",
     "nuxt": "^2.4.0",
     "ts-node": "^8.0.3",
     "vue-promised": "^1.1.1",
