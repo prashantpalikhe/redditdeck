@@ -10,7 +10,7 @@
         <v-progress-linear :height="1" :indeterminate="true" class="ma-0" />
       </template>
 
-      <template #default="{ data: {data: {children: posts}} }">
+      <template #default="{ data: {data: {children: posts = []}} }">
         <v-slide-y-reverse-transition>
           <div class="column__list">
             <post
@@ -30,7 +30,7 @@ import { Component, Vue, Prop } from 'vue-property-decorator'
 import Post from '~/components/Post.vue'
 
 @Component({
-  name: 'Subreddit',
+  name: 'Column',
   components: { Post }
 })
 export default class Subreddit extends Vue {

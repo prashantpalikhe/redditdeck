@@ -71,7 +71,7 @@ export default class Home extends Vue {
     }
 
     if (isSpace || isComma) {
-      this.$refs.select.onEnterDown()
+      ;(this.$refs.select as any).onEnterDown()
     }
   }
 }

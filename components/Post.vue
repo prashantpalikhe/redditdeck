@@ -36,5 +36,9 @@ export default class Post extends Vue {
 .post {
   display: block;
   text-decoration: none;
+
+  a {
+    text-decoration: none;
+  }
 }
 </style>
