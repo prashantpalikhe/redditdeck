@@ -1,7 +1,7 @@
 <template>
   <v-card :href="post.url" tag="a" flat class="post" v-on="on">
     <v-card-title>
-      <div :href="post.url" noopener target="_blank" class="pa-2">
+      <div :href="post.url" noopener target="_blank" class="pa-2 body-1">
         {{ post.title }}
 
         <div>

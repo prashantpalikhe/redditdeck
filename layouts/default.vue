@@ -75,5 +75,7 @@ export default class DefaultLayout extends Vue {
 <style>
 html {
   overflow: hidden;
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.5;
 }
 </style>
