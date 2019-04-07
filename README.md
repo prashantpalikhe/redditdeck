@@ -1,5 +1,7 @@
 # newtab-reddit
 
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+
 > New tab chrome extension to keep track of subreddits
 
 ## Build Setup
