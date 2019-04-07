@@ -4,6 +4,8 @@
 
 > New tab chrome extension to keep track of subreddits
 
+<img src="newtab-reddit.gif" width="895">
+
 ## Build Setup
 
 ```bash
