@@ -76,5 +76,6 @@ export default class Home extends Vue {
   display: flex;
   overflow-y: hidden;
   overflow-x: auto;
+  overscroll-behavior: contain;
 }
 </style>
