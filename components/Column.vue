@@ -14,11 +14,15 @@
         </template>
 
         <v-list>
-          <v-list-tile @click="onDeleteClick">
+          <v-list-tile @click="confirmAndDelete">
             <v-list-tile-title>Delete</v-list-tile-title>
           </v-list-tile>
+          <v-divider />
           <v-list-tile @click="showSearch = true">
             <v-list-tile-title>Search</v-list-tile-title>
+          </v-list-tile>
+          <v-list-tile @click="refresh">
+            <v-list-tile-title>Refresh</v-list-tile-title>
           </v-list-tile>
         </v-list>
       </v-menu>
@@ -82,11 +86,7 @@ export default class Subreddit extends Vue {
   fuse = null
 
   mounted() {
-    this.postsPromise = this.$axios.get(
-      `https://cors-anywhere.herokuapp.com/https://reddit.com/r/${
-        this.subreddit
-      }.json`
-    )
+    this.refresh()
   }
 
   filterPosts(posts) {
@@ -103,7 +103,15 @@ export default class Subreddit extends Vue {
     return fuse.search(this.searchQuery)
   }
 
-  async onDeleteClick() {
+  refresh() {
+    this.postsPromise = this.$axios.get(
+      `https://cors-anywhere.herokuapp.com/https://reddit.com/r/${
+        this.subreddit
+      }.json`
+    )
+  }
+
+  async confirmAndDelete() {
     const confirmed = await (this.$refs.confirmDialog as any).open({
       title: 'Remove column',
       message: `Are you sure you want to remove /r/${this.subreddit}`,
