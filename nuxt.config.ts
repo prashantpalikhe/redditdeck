@@ -53,12 +53,10 @@ const config: NuxtConfiguration = {
    */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios'
-    // '@nuxtjs/pwa',
-    // '@nuxtjs/proxy'
+    '@nuxtjs/axios',
+    '@nuxtjs/pwa'
   ],
 
-  // proxy: ['http://reddit.com/r/*.json'],
   /*
    ** Axios module configuration
    */

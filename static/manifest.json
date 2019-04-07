@@ -13,5 +13,6 @@
     "default_icon": "icon.png"
   },
 
-  "permissions": ["tabs"]
+  "permissions": ["tabs"],
+  "content_security_policy": "script-src 'self' https://storage.googleapis.com; object-src 'self'"
 }
