@@ -1,8 +1,8 @@
-# newtab-reddit
+# RedditDeck
 
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
-> New tab chrome extension to keep track of subreddits
+> TweetDeck for Reddit
 
 <img src="newtab-reddit.gif" width="895">
 
