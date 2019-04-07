@@ -12,7 +12,7 @@
         <v-list class="pa-0">
           <v-list-tile avatar>
             <v-list-tile-avatar>
-              <img src="~/assets/image/reddit.svg" />
+              <img src="~/assets/image/icon.png" />
             </v-list-tile-avatar>
 
             <v-spacer />
@@ -48,9 +48,9 @@
     </v-navigation-drawer>
 
     <v-content>
-      <v-fade-transition>
+      <v-slide-x-reverse-transition>
         <nuxt />
-      </v-fade-transition>
+      </v-slide-x-reverse-transition>
     </v-content>
   </v-app>
 </template>

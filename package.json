@@ -11,7 +11,8 @@
     "generate": "nuxt generate",
     "lint": "eslint --ext .ts,.js,.vue --ignore-path .gitignore .",
     "precommit": "npm run lint",
-    "test": "jest"
+    "test": "jest",
+    "gui": "npm-gui"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.3.6",
@@ -51,6 +52,7 @@
     "eslint-plugin-vue": "^5.2.2",
     "jest": "^24.1.0",
     "nodemon": "^1.18.9",
+    "npm-gui": "^2.0.1",
     "prettier": "^1.16.4",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",

@@ -1,10 +1,10 @@
 # newtab-reddit
 
-> New tab chrome extension to keep track of subreddis
+> New tab chrome extension to keep track of subreddits
 
 ## Build Setup
 
-``` bash
+```bash
 # install dependencies
 $ npm install
 
@@ -18,5 +18,3 @@ $ npm start
 # generate static project
 $ npm run generate
 ```
-
-For detailed explanation on how things work, checkout [Nuxt.js docs](https://nuxtjs.org).
