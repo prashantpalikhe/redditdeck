@@ -1,7 +1,7 @@
 {
-  "name": "newtab-reddit",
+  "name": "redditdeck",
   "version": "1.0.0",
-  "description": "New tab chrome extension to keep track of subreddis",
+  "description": "TweetDeck for Reddit",
   "author": "Prashant Palikhe",
   "private": true,
   "scripts": {

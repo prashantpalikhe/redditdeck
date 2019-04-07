@@ -4,7 +4,7 @@
 
 > TweetDeck for Reddit
 
-<img src="newtab-reddit.gif" width="895">
+<img src="redditdeck.gif" width="895">
 
 ## Build Setup
 
