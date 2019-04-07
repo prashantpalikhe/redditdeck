@@ -2,11 +2,13 @@
   <div ref="subredditsContainer" class="subreddits">
     <column
       v-for="subreddit in subreddits"
-      :key="subreddit"
       :id="subreddit"
+      :key="subreddit"
       :subreddit="subreddit"
-      @delete="deleteSubreddit($event)"
+      @delete="confirmAndDelete"
     />
+
+    <confirm-dialog ref="confirmDialog" />
   </div>
 </template>
 
@@ -17,11 +19,12 @@ import 'dragula/dist/dragula.css'
 import { Component, Vue } from 'vue-property-decorator'
 import { namespace } from 'vuex-class'
 import Column from '~/components/Column.vue'
+import ConfirmDialog from '~/components/Dialog.vue'
 
 const Reddit = namespace('reddit')
 
 @Component({
-  components: { Column }
+  components: { Column, ConfirmDialog }
 })
 export default class Home extends Vue {
   @Reddit.State subreddits
@@ -46,9 +49,23 @@ export default class Home extends Vue {
   }
 
   saveNewOrder() {
-    const subreddits = [...this.draggable.containers[0].children].map(x => x.id)
+    const subreddits = [...this.draggable.containers[0].children]
+      .map(x => x.id)
+      .filter(x => !!x)
 
     this.setSubreddits(subreddits)
+  }
+
+  async confirmAndDelete(subreddit) {
+    const confirmed = await (this.$refs.confirmDialog as any).open({
+      title: 'Remove column',
+      message: `Are you sure you want to remove /r/${subreddit}`,
+      type: 'confirm'
+    })
+
+    if (confirmed) {
+      this.deleteSubreddit(subreddit)
+    }
   }
 }
 </script>

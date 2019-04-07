@@ -14,7 +14,7 @@
         </template>
 
         <v-list>
-          <v-list-tile @click="confirmAndDelete">
+          <v-list-tile @click="$emit('delete', subreddit)">
             <v-list-tile-title>Delete</v-list-tile-title>
           </v-list-tile>
           <v-divider />
@@ -59,8 +59,6 @@
         </v-slide-y-reverse-transition>
       </template>
     </Promised>
-
-    <confirm-dialog ref="confirmDialog" />
   </div>
 </template>
 
@@ -68,11 +66,10 @@
 import Fuse from 'fuse.js'
 import { Component, Vue, Prop } from 'vue-property-decorator'
 import Post from '~/components/Post.vue'
-import ConfirmDialog from '~/components/Dialog.vue'
 
 @Component({
   name: 'Column',
-  components: { Post, ConfirmDialog }
+  components: { Post }
 })
 export default class Subreddit extends Vue {
   @Prop({ type: String, required: true })
@@ -89,6 +86,14 @@ export default class Subreddit extends Vue {
     this.refresh()
   }
 
+  refresh() {
+    this.postsPromise = this.$axios.get(
+      `https://cors-anywhere.herokuapp.com/https://reddit.com/r/${
+        this.subreddit
+      }.json`
+    )
+  }
+
   filterPosts(posts) {
     if (this.searchQuery === '') {
       return posts
@@ -101,26 +106,6 @@ export default class Subreddit extends Vue {
     const fuse = new Fuse(posts, options)
 
     return fuse.search(this.searchQuery)
-  }
-
-  refresh() {
-    this.postsPromise = this.$axios.get(
-      `https://cors-anywhere.herokuapp.com/https://reddit.com/r/${
-        this.subreddit
-      }.json`
-    )
-  }
-
-  async confirmAndDelete() {
-    const confirmed = await (this.$refs.confirmDialog as any).open({
-      title: 'Remove column',
-      message: `Are you sure you want to remove /r/${this.subreddit}`,
-      type: 'confirm'
-    })
-
-    if (confirmed) {
-      this.$emit('delete', this.subreddit)
-    }
   }
 
   clearSearch() {
