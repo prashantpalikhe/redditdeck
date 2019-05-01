@@ -6,7 +6,7 @@
 
 <img src="redditdeck.gif" width="895">
 
-## Using as Chrome extension
+## Use as Chrome extension
 
 While the extension is being deployed to the Google play store, you can use `RedditDeck` as a Google Chrome extension manually.
 
@@ -19,7 +19,11 @@ While the extension is being deployed to the Google play store, you can use `Red
 
 From this point on, while opening a new tab, you will see the `RedditDeck`. So you can stay updated with whatever you are following, with every new tab.
 
-## Build Setup
+## Use as PWA
+
+You can install https://redditdeck.prashantpalikhe.com/ as desktop or mobile PWA as well.
+
+## Build setup
 
 ```bash
 # install dependencies
