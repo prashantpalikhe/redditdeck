@@ -8,11 +8,13 @@
 
 ## Use as Chrome extension
 
-While the extension is being deployed to the Google play store, you can use `RedditDeck` as a Google Chrome extension manually.
+[Get here](https://chrome.google.com/webstore/detail/redditdeck/lijefbkahlhiophapoeokibmmdnfagln)
+
+To install as Chrome extension while developing locally:
 
 1. `npm install`
 2. `npm run build`. This generates a `dist` folder
-3. Open Google Chrome and go to chrome://extensions 
+3. Open Google Chrome and go to chrome://extensions
 4. Make sure `developer mode` is enabled.
 5. Drag the `dist` folder from #2 into the extension page
 6. All set
