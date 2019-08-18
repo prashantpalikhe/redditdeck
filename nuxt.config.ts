@@ -4,6 +4,7 @@ import pkg from './package.json'
 
 const config: NuxtConfiguration = {
   mode: 'spa',
+  modern: true,
 
   /*
    ** Headers of the page

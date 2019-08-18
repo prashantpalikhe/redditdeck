@@ -1,9 +1,15 @@
 {
   "manifest_version": 2,
 
-  "name": "Newtab Reddit",
-  "description": "",
-  "version": "1.0",
+  "name": "Redditdeck",
+  "description": "Tweetdeck for Reddit for every new tab you open",
+  "short_name": "Redditdeck",
+  "version": "0.0.0.1",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
 
   "chrome_url_overrides": {
     "newtab": "index.html"
