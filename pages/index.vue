@@ -28,7 +28,9 @@ const Reddit = namespace('reddit')
 })
 export default class Home extends Vue {
   @Reddit.State subreddits
+
   @Reddit.Action deleteSubreddit
+
   @Reddit.Action setSubreddits
 
   draggable

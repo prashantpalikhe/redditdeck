@@ -39,9 +39,11 @@ const App = namespace('app')
 @Component
 export default class Home extends Vue {
   @App.Action setDarkMode
+
   @Reddit.Action setSubreddits
 
   @App.State dark
+
   @Reddit.State subreddits
 
   get subr() {

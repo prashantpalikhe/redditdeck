@@ -1,3 +1,4 @@
 export default () => ({
-  subreddits: ['javascript', 'vuejs', 'reactjs']
+  subreddits: ['javascript', 'vuejs', 'reactjs'],
+  bookmarks: {}
 })

@@ -9,3 +9,20 @@ export function deleteSubreddit(state, subreddit) {
     state.subreddits.splice(index, 1)
   }
 }
+
+export function addBookmark(state, { post, subreddit }) {
+  const subredditBookmarks = state.bookmarks[subreddit] || []
+
+  subredditBookmarks.push(post)
+
+  state.bookmarks[subreddit] = subredditBookmarks
+}
+
+export function removeBookmark(state, { post, subreddit }) {
+  const subredditBookmarks = state.bookmarks[subreddit]
+  const bookmarkIndex = subredditBookmarks.findIndex(
+    bookmark => bookmark.id === post.id
+  )
+
+  subredditBookmarks.splice(bookmarkIndex, 1)
+}

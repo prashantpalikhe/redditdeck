@@ -51,9 +51,18 @@
         <v-slide-y-reverse-transition>
           <div class="column__list">
             <post
-              v-for="{ data: post } in filterPosts(posts)"
-              :key="post.title"
+              v-for="post in getBookmarksBySubreddit(subreddit)"
+              :key="post.id"
               :post="post"
+              is-bookmark
+              @remove-bookmark="removeBookmark({ post, subreddit })"
+            />
+
+            <post
+              v-for="{ data: post } in filterPosts(posts)"
+              :key="post.id"
+              :post="post"
+              @add-bookmark="addBookmark({ post, subreddit })"
             />
           </div>
         </v-slide-y-reverse-transition>
@@ -65,7 +74,11 @@
 <script lang="ts">
 import Fuse from 'fuse.js'
 import { Component, Vue, Prop } from 'vue-property-decorator'
+import { namespace } from 'vuex-class'
 import Post from '~/components/Post.vue'
+import { API_BASE_URL } from '~/constants'
+
+const Reddit = namespace('reddit')
 
 @Component({
   name: 'Column',
@@ -75,9 +88,18 @@ export default class Subreddit extends Vue {
   @Prop({ type: String, required: true })
   subreddit: string
 
+  @Reddit.Getter isBookmarked
+
+  @Reddit.Getter getBookmarksBySubreddit
+
+  @Reddit.Action addBookmark
+
+  @Reddit.Action removeBookmark
+
   postsPromise: any = null
 
   searchQuery = ''
+
   showSearch = false
 
   fuse = null
@@ -87,23 +109,25 @@ export default class Subreddit extends Vue {
   }
 
   refresh() {
-    this.postsPromise = this.$axios.get(
-      `https://cors-anywhere.herokuapp.com/https://reddit.com/r/${
-        this.subreddit
-      }.json`
-    )
+    const url = `${API_BASE_URL}${this.subreddit}.json`
+
+    this.postsPromise = this.$axios.get(url)
   }
 
   filterPosts(posts) {
+    const nonbookmarkedPosts = posts.filter(({ data: post }) => {
+      return !this.isBookmarked({ post, subreddit: this.subreddit })
+    })
+
     if (this.searchQuery === '') {
-      return posts
+      return nonbookmarkedPosts
     }
 
     const options = {
       keys: ['data.title']
     }
 
-    const fuse = new Fuse(posts, options)
+    const fuse = new Fuse(nonbookmarkedPosts, options)
 
     return fuse.search(this.searchQuery)
   }
