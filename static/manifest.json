@@ -4,7 +4,7 @@
   "name": "RedditDeck",
   "description": "Tweetdeck for Reddit for every new tab you open",
   "short_name": "RedditDeck",
-  "version": "0.0.0.3",
+  "version": "0.0.0.4",
   "icons": {
     "16": "icon16.png",
     "48": "icon48.png",
