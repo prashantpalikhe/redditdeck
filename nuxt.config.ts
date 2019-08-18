@@ -1,10 +1,28 @@
+import pkg from './package.json'
 import NuxtConfiguration from '@nuxt/config'
 import VuetifyLoaderPlugin from 'vuetify-loader/lib/plugin'
-import pkg from './package.json'
+import { NuxtConfigurationModule } from '@nuxt/config/types/module'
+import { PluginItem } from '@babel/core'
+
+const modules: NuxtConfigurationModule[] = ['@nuxtjs/axios']
+
+if (process.env.REDDITDECK_PWA) {
+  modules.push('@nuxtjs/pwa')
+}
+
+if (process.env.REDDITDECK_TRACKING) {
+  modules.push([
+    '@nuxtjs/google-analytics',
+    {
+      id: 'UA-137863717-1',
+      dev: false
+    }
+  ])
+}
 
 const config: NuxtConfiguration = {
   mode: 'spa',
-  modern: true,
+  modern: false,
 
   /*
    ** Headers of the page
@@ -33,7 +51,7 @@ const config: NuxtConfiguration = {
   /*
    ** Customize the progress-bar color
    */
-  loading: { color: '#fff' },
+  loading: false,
 
   /*
    ** Global CSS
@@ -52,18 +70,7 @@ const config: NuxtConfiguration = {
   /*
    ** Nuxt.js modules
    */
-  modules: [
-    // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios',
-    '@nuxtjs/pwa',
-    [
-      '@nuxtjs/google-analytics',
-      {
-        id: 'UA-137863717-1',
-        dev: false
-      }
-    ]
-  ],
+  modules,
 
   /*
    ** Axios module configuration
@@ -76,6 +83,23 @@ const config: NuxtConfiguration = {
    ** Build configuration
    */
   build: {
+    babel: {
+      presets(_, [preset, options]): PluginItem[] {
+        return [
+          [
+            preset,
+            {
+              ...options,
+              ...{
+                targets: {
+                  browsers: ['last 2 Chrome versions']
+                }
+              }
+            }
+          ]
+        ]
+      }
+    },
     publicPath: '/assets',
     transpile: ['vuetify/lib'],
     plugins: [new VuetifyLoaderPlugin()],
