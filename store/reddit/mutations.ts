@@ -1,3 +1,5 @@
+import Vue from 'vue'
+
 export function setSubreddits(state, subreddits) {
   state.subreddits = subreddits
 }
@@ -15,7 +17,7 @@ export function addBookmark(state, { post, subreddit }) {
 
   subredditBookmarks.push(post)
 
-  state.bookmarks[subreddit] = subredditBookmarks
+  Vue.set(state.bookmarks, subreddit, subredditBookmarks)
 }
 
 export function removeBookmark(state, { post, subreddit }) {
