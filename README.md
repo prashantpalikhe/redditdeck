@@ -1,6 +1,7 @@
 # ![RedditDeck](logo.png)
 
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/675748d5-9667-4890-a9f6-062be4e58d62/deploy-status)](https://app.netlify.com/sites/inspiring-easley-d54e9c/deploys)
 
 > TweetDeck for Reddit
 
